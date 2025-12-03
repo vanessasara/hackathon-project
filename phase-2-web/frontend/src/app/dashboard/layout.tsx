@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { getSession } from "../proxy";
-import Link from "next/link";
-import { LogoutButton } from "@/components/logout-button";
+import { DashboardClient } from "./dashboard-client";
 
 export default async function DashboardLayout({
   children,
@@ -14,22 +13,5 @@ export default async function DashboardLayout({
     redirect("/login");
   }
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="text-xl font-bold text-gray-900">
-            Todo App
-          </Link>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-600">{session.user.email}</span>
-            <LogoutButton />
-          </div>
-        </div>
-      </header>
-      <main className="max-w-4xl mx-auto px-4 py-8">
-        {children}
-      </main>
-    </div>
-  );
+  return <DashboardClient userEmail={session.user.email}>{children}</DashboardClient>;
 }

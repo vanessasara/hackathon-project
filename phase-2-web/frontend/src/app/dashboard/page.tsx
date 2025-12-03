@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { TaskForm } from "@/components/task-form";
+import { ExpandableInput } from "@/components/expandable-input";
 import { TaskList, TaskListRef } from "@/components/task-list";
 
 export default function DashboardPage() {
@@ -13,8 +13,7 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">My Tasks</h1>
-      <TaskForm onTaskCreated={handleTaskCreated} />
+      <ExpandableInput onTaskCreated={handleTaskCreated} />
       <TaskList ref={taskListRef} />
     </div>
   );

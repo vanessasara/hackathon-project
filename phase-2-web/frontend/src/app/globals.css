@@ -1,26 +1,127 @@
 @import "tailwindcss";
 
+/* Google Keep Theme - Light Mode */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #202124;
+  --card: #ffffff;
+  --card-hover: #f1f3f4;
+  --card-border: #e0e0e0;
+  --sidebar-bg: #ffffff;
+  --sidebar-hover: #feefc3;
+  --sidebar-active: #feefc3;
+  --input-bg: #f1f3f4;
+  --muted: #5f6368;
+  --muted-foreground: #5f6368;
+  --primary: #fbbc04;
+  --primary-foreground: #202124;
+  --destructive: #d93025;
+  --destructive-foreground: #ffffff;
+  --border: #e0e0e0;
+  --ring: #fbbc04;
+  --radius: 8px;
+
+  /* Google Keep Note Colors - Light Mode */
+  --color-coral: #f28b82;
+  --color-peach: #fbbc04;
+  --color-sand: #fff475;
+  --color-mint: #ccff90;
+  --color-sage: #a7ffeb;
+  --color-fog: #cbf0f8;
+  --color-storm: #aecbfa;
+  --color-dusk: #d7aefb;
+}
+
+/* Google Keep Theme - Dark Mode */
+.dark {
+  --background: #202124;
+  --foreground: #e8eaed;
+  --card: #28292c;
+  --card-hover: #525355;
+  --card-border: #5f6368;
+  --sidebar-bg: #202124;
+  --sidebar-hover: #41331c;
+  --sidebar-active: #41331c;
+  --input-bg: #525355;
+  --muted: #9aa0a6;
+  --muted-foreground: #9aa0a6;
+  --primary: #fbbc04;
+  --primary-foreground: #202124;
+  --destructive: #f28b82;
+  --destructive-foreground: #202124;
+  --border: #5f6368;
+  --ring: #fbbc04;
+
+  /* Google Keep Note Colors - Dark Mode */
+  --color-coral: #77172e;
+  --color-peach: #7c4a03;
+  --color-sand: #7c4a03;
+  --color-mint: #264d3b;
+  --color-sage: #0c625d;
+  --color-fog: #256377;
+  --color-storm: #284255;
+  --color-dusk: #472e5b;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-hover: var(--card-hover);
+  --color-card-border: var(--card-border);
+  --color-sidebar-bg: var(--sidebar-bg);
+  --color-sidebar-hover: var(--sidebar-hover);
+  --color-sidebar-active: var(--sidebar-active);
+  --color-input-bg: var(--input-bg);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Grid Layout for Notes (Google Keep style) */
+.masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+/* For smaller screens, allow cards to be full width */
+@media (max-width: 500px) {
+  .masonry-grid {
+    grid-template-columns: 1fr;
   }
+}
+
+/* Grid item */
+.masonry-item {
+  /* Cards flow naturally in grid - no special styles needed */
+}
+
+/* List View */
+.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Smooth theme transitions */
+* {
+  transition: background-color 0.1s ease, border-color 0.1s ease;
 }

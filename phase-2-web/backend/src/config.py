@@ -22,6 +22,11 @@ class Settings:
         frontend_url: Frontend URL for CORS
         debug: Enable debug mode (default: False)
         environment: Environment name (default: "development")
+        r2_account_id: Cloudflare R2 account ID
+        r2_access_key_id: R2 access key ID
+        r2_secret_access_key: R2 secret access key
+        r2_bucket_name: R2 bucket name
+        r2_public_url: R2 public URL for accessing objects
     """
 
     def __init__(self):
@@ -30,6 +35,13 @@ class Settings:
         self.frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
         self.debug = os.getenv("DEBUG", "false").lower() in ("true", "1", "yes")
         self.environment = os.getenv("ENVIRONMENT", "development")
+
+        # Cloudflare R2 settings
+        self.r2_account_id = os.getenv("R2_ACCOUNT_ID", "")
+        self.r2_access_key_id = os.getenv("R2_ACCESS_KEY_ID", "")
+        self.r2_secret_access_key = os.getenv("R2_SECRET_ACCESS_KEY", "")
+        self.r2_bucket_name = os.getenv("R2_BUCKET_NAME", "")
+        self.r2_public_url = os.getenv("R2_PUBLIC_URL", "")
 
 
 settings = Settings()
