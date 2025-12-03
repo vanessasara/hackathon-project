@@ -12,13 +12,18 @@ export function LogoutButton() {
   const handleLogout = async () => {
     setLoading(true);
     try {
-      await signOut();
-      router.push("/login");
-      router.refresh();
+      await signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            router.push("/login");
+          },
+        },
+      });
     } catch (error) {
-      console.error("Logout failed:", error);
-    } finally {
-      setLoading(false);
+      // Session might already be cleared or network issue
+      // Still redirect to login page
+      console.error("Logout error:", error);
+      router.push("/login");
     }
   };
 

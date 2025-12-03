@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { ThemeProvider } from "@/lib/theme-provider";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Todo App",
-  description: "Full-Stack Web Todo Application",
+  title: "Keep Todo",
+  description: "Google Keep-inspired Todo Application",
 };
 
 export default function RootLayout({
@@ -12,9 +14,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-gray-50 antialiased">
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-screen bg-background text-foreground antialiased">
+        <ThemeProvider>
+          {children}
+          <Toaster
+            position="bottom-left"
+            toastOptions={{
+              style: {
+                background: "var(--card)",
+                border: "1px solid var(--card-border)",
+                color: "var(--foreground)",
+              },
+            }}
+          />
+        </ThemeProvider>
       </body>
     </html>
   );
