@@ -212,6 +212,8 @@ See `.specify/memory/constitution.md` for code quality, testing, performance, se
 ## Active Technologies
 - Python 3.13+ + None (standard library only); pytest for testing (001-console-todo-app)
 - In-memory (Python list with Task dataclass instances) (001-console-todo-app)
+- Python 3.13+ (backend), TypeScript/Node.js 22+ (frontend) + FastAPI, SQLModel, OpenAI Agents SDK, MCP SDK (backend); Next.js 16, @openai/chatkit (frontend) (003-ai-chatbot)
+- Neon Serverless PostgreSQL (existing + new tables) (003-ai-chatbot)
 
 ## Recent Changes
 - 001-console-todo-app: Added Python 3.13+ + None (standard library only); pytest for testing

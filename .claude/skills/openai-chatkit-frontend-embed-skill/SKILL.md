@@ -41,6 +41,67 @@ defer to the backend Skill (`openai-chatkit-backend-python` or TS equivalent).
 
 ---
 
+## ⚠️ CRITICAL: ChatKit CDN Script Required
+
+**THE MOST COMMON MISTAKE**: Forgetting to load the ChatKit CDN script.
+
+**Without this script, widgets will NOT render with proper styling.**
+This caused significant debugging time during implementation - widgets appeared blank/unstyled.
+
+### Next.js Solution
+
+```tsx
+// src/app/layout.tsx
+import Script from "next/script";
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        {/* CRITICAL: Load ChatKit CDN script for widget styling */}
+        <Script
+          src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
+          strategy="afterInteractive"
+        />
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+### React/Vanilla JS Solution
+
+```html
+<!-- In index.html -->
+<script src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"></script>
+```
+
+### Using useEffect (React)
+
+```tsx
+useEffect(() => {
+  const script = document.createElement('script');
+  script.src = 'https://cdn.platform.openai.com/deployments/chatkit/chatkit.js';
+  script.async = true;
+  document.body.appendChild(script);
+
+  return () => {
+    document.body.removeChild(script);
+  };
+}, []);
+```
+
+**Symptoms if CDN script is missing:**
+- Widgets render but have no styling
+- ChatKit appears blank or broken
+- Widget components don't display properly
+- No visual feedback when interacting with widgets
+
+**First debugging step**: Always verify the CDN script is loaded before troubleshooting other issues.
+
+---
+
 ## 2. Frontend Architecture Assumptions
 
 There are two main modes you must recognize:
@@ -94,7 +155,44 @@ mentions their own backend or Agents SDK. Hosted workflow mode is secondary.
 
 When you generate or modify frontend code, you must ensure:
 
+### 3.0 Load ChatKit CDN Script (CRITICAL - FIRST!)
+
+**Always ensure the CDN script is loaded** before any ChatKit component is rendered:
+
+```tsx
+// Next.js - in layout.tsx
+<Script
+  src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"
+  strategy="afterInteractive"
+/>
+```
+
+This is the #1 cause of "blank widget" issues. See the CRITICAL section above for details.
+
 ### 3.1 Correct ChatKit Client/Component Setup
+
+**Modern Pattern with @openai/chatkit-react:**
+
+```tsx
+"use client";
+import { useChatKit, ChatKit } from "@openai/chatkit-react";
+
+export function MyChatComponent() {
+  const chatkit = useChatKit({
+    api: {
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/chatkit`,
+      domainKey: "your-domain-key",
+    },
+    onError: ({ error }) => {
+      console.error("ChatKit error:", error);
+    },
+  });
+
+  return <ChatKit control={chatkit.control} />;
+}
+```
+
+**Legacy Pattern (older ChatKit JS):**
 
 Depending on the official ChatKit JS / React API, the frontend must:
 
