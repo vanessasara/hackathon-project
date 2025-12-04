@@ -1,0 +1,16 @@
+apiVersion: v2
+name: todo-app
+description: Evolution of Todo - AI-Powered Task Management
+version: 1.0.0
+appVersion: "3.0.0"
+type: application
+keywords:
+  - todo
+  - ai
+  - chatbot
+  - kubernetes
+maintainers:
+  - name: Evolution of Todo Team
+home: https://github.com/evolution-of-todo
+sources:
+  - https://github.com/evolution-of-todo

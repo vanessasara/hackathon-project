@@ -1,0 +1,56 @@
+Thank you for installing {{ .Chart.Name }}!
+
+Your Todo App has been deployed to Kubernetes.
+
+📋 Release Information:
+   Name:      {{ .Release.Name }}
+   Namespace: {{ .Release.Namespace }}
+   Version:   {{ .Chart.Version }}
+   App:       {{ .Chart.AppVersion }}
+
+🌐 Access Your Application:
+{{- if eq .Values.service.frontend.type "NodePort" }}
+   Frontend: http://$(minikube ip):{{ .Values.service.frontend.nodePort }}
+{{- else if eq .Values.service.frontend.type "LoadBalancer" }}
+   Frontend: Get external IP with 'kubectl get svc {{ include "todo-app.fullname" . }}-frontend -n {{ .Release.Namespace }}'
+{{- else }}
+   Frontend: Use port-forward: kubectl port-forward -n {{ .Release.Namespace }} svc/{{ include "todo-app.fullname" . }}-frontend {{ .Values.service.frontend.port }}:{{ .Values.service.frontend.port }}
+{{- end }}
+
+📊 Check Deployment Status:
+   kubectl get pods -n {{ .Release.Namespace }}
+   kubectl get services -n {{ .Release.Namespace }}
+
+📝 View Logs:
+   # Frontend
+   kubectl logs -n {{ .Release.Namespace }} -l app.kubernetes.io/component=frontend -f
+
+   # Backend
+   kubectl logs -n {{ .Release.Namespace }} -l app.kubernetes.io/component=backend -f
+
+🔧 Useful Commands:
+   # Restart deployments
+   kubectl rollout restart -n {{ .Release.Namespace }} deployment/{{ include "todo-app.fullname" . }}-frontend
+   kubectl rollout restart -n {{ .Release.Namespace }} deployment/{{ include "todo-app.fullname" . }}-backend
+
+   # Update deployment
+   helm upgrade {{ .Release.Name }} ./helm/todo-app -f ./helm/todo-app/values-dev.yaml -n {{ .Release.Namespace }}
+
+   # Uninstall
+   helm uninstall {{ .Release.Name }} -n {{ .Release.Namespace }}
+
+⚕️ Health Checks:
+   Readiness and liveness probes are configured on /api/health for both services.
+   Pods will not receive traffic until health checks pass.
+
+🔐 Security Note:
+   Secrets are stored in Kubernetes Secret resources and base64-encoded in etcd.
+   Never commit actual secret values to git!
+
+📚 Documentation:
+   - Quick Start: k8s/README.md
+   - Deployment Guide: docs/kubernetes/DEPLOYMENT.md
+   - Troubleshooting: docs/kubernetes/TROUBLESHOOTING.md
+   - AI DevOps Tools: docs/kubernetes/AI_DEVOPS.md
+
+✨ Enjoy your AI-powered Todo App!

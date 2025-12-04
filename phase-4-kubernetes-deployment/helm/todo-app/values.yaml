@@ -1,0 +1,113 @@
+# Default values for todo-app
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount:
+  frontend: 1
+  backend: 1
+
+image:
+  frontend:
+    repository: todo-frontend
+    tag: latest
+    pullPolicy: IfNotPresent
+  backend:
+    repository: todo-backend
+    tag: latest
+    pullPolicy: IfNotPresent
+
+service:
+  frontend:
+    type: LoadBalancer
+    port: 3000
+    targetPort: 3000
+  backend:
+    type: ClusterIP
+    port: 8000
+    targetPort: 8000
+
+resources:
+  frontend:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+  backend:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+
+healthProbe:
+  frontend:
+    readiness:
+      path: /api/health
+      port: 3000
+      initialDelaySeconds: 15
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 3
+    liveness:
+      path: /api/health
+      port: 3000
+      initialDelaySeconds: 30
+      periodSeconds: 15
+      timeoutSeconds: 5
+      failureThreshold: 3
+  backend:
+    readiness:
+      path: /api/health
+      port: 8000
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 3
+    liveness:
+      path: /api/health
+      port: 8000
+      initialDelaySeconds: 20
+      periodSeconds: 15
+      timeoutSeconds: 5
+      failureThreshold: 3
+
+# Configuration (non-sensitive)
+config:
+  BETTER_AUTH_URL: "http://todo-app-frontend:3000"
+  FRONTEND_URL: "http://todo-app-frontend:3000"
+  BACKEND_URL: "http://todo-app-backend:8000"
+  LLM_PROVIDER: "openai"
+  OPENAI_DEFAULT_MODEL: "gpt-4o-mini"
+  NEXT_PUBLIC_CHATKIT_API_URL: "/api/chat"
+
+# Secrets (sensitive - must be provided via --set or external secrets)
+# DO NOT commit actual secret values to git!
+secrets:
+  DATABASE_URL: ""
+  BETTER_AUTH_SECRET: ""
+  OPENAI_API_KEY: ""
+  CLOUDFLARE_R2_ACCOUNT_ID: ""
+  CLOUDFLARE_R2_ACCESS_KEY_ID: ""
+  CLOUDFLARE_R2_SECRET_ACCESS_KEY: ""
+  CLOUDFLARE_R2_BUCKET_NAME: ""
+
+# Security Context
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  fsGroup: 1000
+
+# Autoscaling (disabled by default)
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+
+# Node selectors and tolerations (for production)
+nodeSelector: {}
+tolerations: []
+affinity: {}
