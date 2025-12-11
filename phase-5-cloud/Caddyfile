@@ -1,0 +1,35 @@
+# Caddyfile for taskevo.duckdns.org
+# Auto-HTTPS via Let's Encrypt
+
+taskevo.duckdns.org {
+    # API routes -> Backend (FastAPI on port 8000)
+    handle /api/* {
+        reverse_proxy backend:8000
+    }
+
+    # Health check endpoint for the backend
+    handle /health {
+        reverse_proxy backend:8000 {
+            rewrite * /api/health
+        }
+    }
+
+    # Everything else -> Frontend (Next.js on port 3000)
+    handle {
+        reverse_proxy frontend:3000
+    }
+
+    # Enable gzip compression
+    encode gzip
+
+    # Logging
+    log {
+        output stdout
+        format console
+    }
+}
+
+# Redirect www to non-www (if needed in future)
+www.taskevo.duckdns.org {
+    redir https://taskevo.duckdns.org{uri} permanent
+}

@@ -1,0 +1,51 @@
+{{- if .Values.dapr.enabled }}
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: kafka-pubsub
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: pubsub.kafka
+  version: v1
+  metadata:
+    # Redpanda Cloud / Kafka bootstrap servers
+    - name: brokers
+      value: {{ .Values.dapr.kafka.brokers | quote }}
+    # SASL authentication
+    - name: authType
+      value: "password"
+    - name: saslUsername
+      secretKeyRef:
+        name: {{ .Release.Name }}-kafka-secret
+        key: KAFKA_SASL_USERNAME
+    - name: saslPassword
+      secretKeyRef:
+        name: {{ .Release.Name }}-kafka-secret
+        key: KAFKA_SASL_PASSWORD
+    - name: saslMechanism
+      value: "SHA-256"
+    # TLS configuration for Redpanda Cloud Serverless
+    - name: disableTls
+      value: "false"
+    # Client configuration
+    - name: clientID
+      value: "todo-app-dapr"
+    - name: initialOffset
+      value: "newest"
+    # Consumer configuration
+    - name: consumerGroup
+      value: "todo-app-consumers"
+    # Producer configuration
+    - name: maxMessageBytes
+      value: "1048576"
+    # Timeout configuration - increase for cloud connections
+    - name: dialTimeout
+      value: "30s"
+    - name: readTimeout
+      value: "30s"
+    - name: writeTimeout
+      value: "30s"
+  scopes:
+    - todo-app-backend
+    - todo-app-notification
+{{- end }}

@@ -1,0 +1,161 @@
+# DigitalOcean Kubernetes (DOKS) values - Budget Optimized
+# Cost target: ~$24/month (single node, no LoadBalancer)
+#
+# Usage:
+#   helm upgrade --install todo-app ./helm/todo-app \
+#     -f ./helm/todo-app/values-doks.yaml \
+#     --set secrets.DATABASE_URL=$DATABASE_URL \
+#     --set secrets.BETTER_AUTH_SECRET=$BETTER_AUTH_SECRET \
+#     --set secrets.OPENAI_API_KEY=$OPENAI_API_KEY
+
+replicaCount:
+  frontend: 1
+  backend: 1
+
+image:
+  frontend:
+    repository: registry.digitalocean.com/todoappregistry2024/frontend
+    tag: latest
+    pullPolicy: Always
+  backend:
+    repository: registry.digitalocean.com/todoappregistry2024/backend
+    tag: latest
+    pullPolicy: Always
+
+# NodePort instead of LoadBalancer saves $12/month
+service:
+  frontend:
+    type: NodePort
+    port: 3000
+    targetPort: 3000
+    nodePort: 30080  # Access via http://<NODE_IP>:30080
+  backend:
+    type: ClusterIP
+    port: 8000
+    targetPort: 8000
+
+# Constrained resources for single 4GB node
+resources:
+  frontend:
+    requests:
+      memory: "128Mi"
+      cpu: "50m"
+    limits:
+      memory: "256Mi"
+      cpu: "200m"
+  backend:
+    requests:
+      memory: "128Mi"
+      cpu: "50m"
+    limits:
+      memory: "256Mi"
+      cpu: "200m"
+
+# Health probes (same as default)
+healthProbe:
+  frontend:
+    readiness:
+      path: /api/health
+      port: 3000
+      initialDelaySeconds: 15
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 3
+    liveness:
+      path: /api/health
+      port: 3000
+      initialDelaySeconds: 30
+      periodSeconds: 15
+      timeoutSeconds: 5
+      failureThreshold: 3
+  backend:
+    readiness:
+      path: /api/health
+      port: 8000
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 3
+    liveness:
+      path: /api/health
+      port: 8000
+      initialDelaySeconds: 20
+      periodSeconds: 15
+      timeoutSeconds: 5
+      failureThreshold: 3
+
+# Configuration (non-sensitive)
+# NOTE: BETTER_AUTH_URL and FRONTEND_URL must use external IP for auth to work
+config:
+  BETTER_AUTH_URL: "https://allan-dans-anti-bulk.trycloudflare.com"
+  FRONTEND_URL: "https://allan-dans-anti-bulk.trycloudflare.com"
+  BACKEND_URL: "http://todo-app-backend:8000"
+  LLM_PROVIDER: "openai"
+  OPENAI_DEFAULT_MODEL: "gpt-4o-mini"
+  NEXT_PUBLIC_CHATKIT_API_URL: "/api/chat"
+
+# Secrets (provided via --set at deploy time)
+secrets:
+  DATABASE_URL: ""
+  BETTER_AUTH_SECRET: ""
+  OPENAI_API_KEY: ""
+  CLOUDFLARE_R2_ACCOUNT_ID: ""
+  CLOUDFLARE_R2_ACCESS_KEY_ID: ""
+  CLOUDFLARE_R2_SECRET_ACCESS_KEY: ""
+  CLOUDFLARE_R2_BUCKET_NAME: ""
+  # Kafka/Redpanda credentials (Part B: Advanced Features)
+  KAFKA_SASL_USERNAME: "evolution-todo"
+  KAFKA_SASL_PASSWORD: "Xjiq9LQeqCFrnIhkiV7n4BVQe9EryP"
+  # VAPID keys for Web Push (Part B: Advanced Features)
+  VAPID_PUBLIC_KEY: "BO3hZqoT_vMDw7m2bGi2VrM0X4KFf-lNZydSEVrgR5Z7xr2CrVI1w-QMc3IvA58Q_8N3EMdHy29u8SVPaB1ed6E"
+  VAPID_PRIVATE_KEY: "AiN-o8Zi9PC2n1G-QXpTXbkjwzOUDQtQKX3CwTnz4tc"
+
+# Security Context
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  fsGroup: 1000
+
+# Autoscaling disabled for budget
+autoscaling:
+  enabled: false
+
+# Image pull secret for DO registry
+imagePullSecrets:
+  - name: registry-todoappregistry2024
+
+# =============================================================================
+# Part B: Advanced Features Configuration (Dapr + Kafka)
+# =============================================================================
+
+# Dapr configuration for event-driven architecture
+dapr:
+  enabled: true
+  kafka:
+    # Redpanda Cloud bootstrap servers
+    brokers: "d4rgv9ooh6b6hpa1dskg.any.ap-south-1.mpx.prd.cloud.redpanda.com:9092"
+  cron:
+    # Reminder check schedule (every minute)
+    schedule: "*/1 * * * *"
+
+# Notification service configuration
+notificationService:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: registry.digitalocean.com/todoappregistry2024/notification
+    tag: latest
+    pullPolicy: Always
+  resources:
+    requests:
+      memory: "64Mi"
+      cpu: "25m"
+    limits:
+      memory: "128Mi"
+      cpu: "100m"
+
+# VAPID keys for Web Push notifications (provided via --set)
+vapid:
+  publicKey: ""
+  privateKey: ""
+  subject: "mailto:admin@todo-app.example.com"

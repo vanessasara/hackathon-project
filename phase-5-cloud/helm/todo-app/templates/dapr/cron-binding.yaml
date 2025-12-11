@@ -1,0 +1,20 @@
+{{- if .Values.dapr.enabled }}
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: reminder-cron
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: bindings.cron
+  version: v1
+  metadata:
+    # Trigger every minute to check for due reminders
+    - name: schedule
+      value: {{ .Values.dapr.cron.schedule | default "*/1 * * * *" | quote }}
+    # Direction: input binding (triggers the app)
+    - name: direction
+      value: "input"
+  scopes:
+    # Only the backend receives cron triggers
+    - todo-app-backend
+{{- end }}
