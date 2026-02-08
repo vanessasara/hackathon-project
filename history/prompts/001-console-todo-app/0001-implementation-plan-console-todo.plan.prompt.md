@@ -2,12 +2,12 @@
 id: 0001
 title: Implementation Plan Console Todo
 stage: plan
-date: 2025-12-01
+date: 2026-01-15
 surface: agent
-model: claude-opus-4-5-20251101
+model: claude-sonnet-4-5-20250929
 feature: 001-console-todo-app
 branch: 001-console-todo-app
-user: hackathon-participant
+user: venisa-sara
 command: /sp.plan
 labels: ["plan", "phase-1", "console-app", "architecture", "hackathon"]
 links:

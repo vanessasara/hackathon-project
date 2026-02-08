@@ -2,14 +2,14 @@
 id: "0003"
 title: "AI Chatbot Task Generation"
 stage: tasks
-date: 2025-12-03
+date: 2026-01-29
 surface: agent
-model: claude-opus-4-5-20251101
+model: claude-sonnet-4-5-20250929
 feature: 003-ai-chatbot
 branch: 003-ai-chatbot
-user: dell
+user: venisa-sara
 command: /sp.tasks
-labels: ["tasks", "implementation", "user-stories", "phases"]
+labels: ["tasks", "implementation", "user-stories", "phases", "hackathon"]
 links:
   spec: specs/003-ai-chatbot/spec.md
   ticket: null

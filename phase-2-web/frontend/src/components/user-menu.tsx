@@ -74,7 +74,7 @@ export function UserMenu({ userEmail }: UserMenuProps) {
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center text-primary font-medium text-sm hover:bg-primary/30 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50"
+        className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500/20 to-violet-500/20 flex items-center justify-center text-indigo-700 dark:text-indigo-400 font-bold text-sm hover:from-indigo-500/30 hover:to-violet-500/30 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500/50 ring-2 ring-indigo-500/20"
         aria-label="User menu"
         aria-expanded={isOpen}
       >
@@ -92,9 +92,9 @@ export function UserMenu({ userEmail }: UserMenuProps) {
             className="absolute right-0 mt-2 w-72 bg-card rounded-xl border border-card-border shadow-lg overflow-hidden z-50"
           >
             {/* User info section */}
-            <div className="p-4 border-b border-card-border">
+            <div className="p-4 border-b border-card-border bg-gradient-to-br from-indigo-500/5 to-violet-500/5">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-semibold text-lg">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500/30 to-violet-500/30 flex items-center justify-center text-indigo-700 dark:text-indigo-300 font-bold text-lg ring-2 ring-indigo-500/30">
                   {getInitials(userEmail)}
                 </div>
                 <div className="flex-1 min-w-0">
@@ -122,8 +122,8 @@ export function UserMenu({ userEmail }: UserMenuProps) {
 
             {/* Footer */}
             <div className="px-4 py-3 border-t border-card-border bg-sidebar-bg/50">
-              <p className="text-xs text-muted-foreground text-center">
-                Notely - Your personal task manager
+              <p className="text-xs font-medium bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent text-center">
+                Velocity - Move with purpose
               </p>
             </div>
           </motion.div>

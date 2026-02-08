@@ -2,14 +2,14 @@
 id: "0001"
 title: "create-fullstack-web-app-spec"
 stage: spec
-date: 2025-12-02
+date: 2026-01-22
 surface: agent
-model: claude-opus-4-5-20251101
+model: claude-sonnet-4-5-20250929
 feature: 002-fullstack-web-app
 branch: 002-fullstack-web-app
-user: zeeshan
+user: venisa-sara
 command: /sp.specify
-labels: ["spec", "phase-2", "fullstack", "web-app"]
+labels: ["spec", "phase-2", "fullstack", "web-app", "hackathon"]
 links:
   spec: specs/002-fullstack-web-app/spec.md
   ticket: null
@@ -24,7 +24,7 @@ tests:
 
 ## Prompt
 
-User triggered /sp.specify to create the feature specification for Phase II of the Evolution of Todo hackathon. The feature is a Full-Stack Web Todo Application with user authentication, RESTful API, and persistent storage - transforming the Phase I console app into a multi-user web application.
+User triggered /sp.specify to create the feature specification for Phase II of the Evolution of Todo project. The feature is a Full-Stack Web Todo Application with user authentication, RESTful API, and persistent storage - transforming the Phase I console app into a multi-user web application.
 
 ## Response snapshot
 

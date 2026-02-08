@@ -2,14 +2,14 @@
 id: "0002"
 title: "AI Chatbot Architecture Plan"
 stage: plan
-date: 2025-12-03
+date: 2026-01-29
 surface: agent
-model: claude-opus-4-5-20251101
+model: claude-sonnet-4-5-20250929
 feature: 003-ai-chatbot
 branch: 003-ai-chatbot
-user: dell
+user: venisa-sara
 command: /sp.plan
-labels: ["architecture", "chatkit", "agents-sdk", "mcp", "streaming"]
+labels: ["architecture", "chatkit", "agents-sdk", "mcp", "streaming", "hackathon"]
 links:
   spec: specs/003-ai-chatbot/spec.md
   ticket: null

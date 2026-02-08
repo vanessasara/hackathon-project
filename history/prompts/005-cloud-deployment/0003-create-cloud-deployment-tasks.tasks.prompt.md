@@ -2,14 +2,14 @@
 id: "0003"
 title: "Create Cloud Deployment Tasks"
 stage: tasks
-date: 2025-12-04
+date: 2026-02-08
 surface: agent
-model: claude-opus-4-5-20251101
+model: claude-sonnet-4-5-20250929
 feature: 005-cloud-deployment
 branch: 005-cloud-deployment
-user: zeeshan
+user: venisa-sara
 command: /sp.tasks
-labels: ["cloud", "deployment", "kubernetes", "tasks", "cicd"]
+labels: ["cloud", "deployment", "kubernetes", "tasks", "cicd", "hackathon"]
 links:
   spec: specs/005-cloud-deployment/spec.md
   ticket: null

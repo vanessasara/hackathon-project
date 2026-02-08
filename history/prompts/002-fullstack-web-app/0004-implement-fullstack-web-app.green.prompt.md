@@ -2,14 +2,14 @@
 id: 0004
 title: Implement Full-Stack Web Todo Application
 stage: green
-date: 2025-12-02
+date: 2026-01-22
 surface: agent
-model: claude-opus-4-5-20251101
+model: claude-sonnet-4-5-20250929
 feature: 002-fullstack-web-app
 branch: 002-fullstack-web-app
-user: dell
+user: venisa-sara
 command: /sp.implement
-labels: ["implementation", "fullstack", "nextjs", "fastapi", "better-auth", "neon"]
+labels: ["implementation", "fullstack", "nextjs", "fastapi", "better-auth", "neon", "hackathon"]
 links:
   spec: specs/002-fullstack-web-app/spec.md
   ticket: null

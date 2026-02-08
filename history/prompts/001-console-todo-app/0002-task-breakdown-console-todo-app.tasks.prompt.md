@@ -2,12 +2,12 @@
 id: 0002
 title: Task Breakdown Console Todo App
 stage: tasks
-date: 2025-12-01
+date: 2026-01-15
 surface: agent
-model: claude-opus-4-5-20251101
+model: claude-sonnet-4-5-20250929
 feature: 001-console-todo-app
 branch: 001-console-todo-app
-user: hackathon-participant
+user: venisa-sara
 command: /sp.tasks
 labels: ["tasks", "phase-1", "console-app", "tdd", "hackathon"]
 links:

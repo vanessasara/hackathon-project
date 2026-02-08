@@ -1,7 +1,7 @@
 # Feature Specification: Local Kubernetes Deployment
 
 **Feature Branch**: `004-kubernetes-deployment`
-**Created**: 2025-12-04
+**Created**: 2026-02-05
 **Status**: Draft
 **Input**: User description: "Local Kubernetes Deployment with Helm and AI DevOps Tools"
 

@@ -8,23 +8,23 @@ import { ThemeToggle } from "@/components/theme-toggle";
 const features = [
   {
     icon: CheckCircle2,
-    title: "Simple & Intuitive",
-    description: "Create and manage tasks with just a few clicks",
+    title: "Lightning Fast",
+    description: "Capture tasks instantly and stay in your flow",
   },
   {
     icon: Sparkles,
-    title: "Beautiful Design",
-    description: "Modern UI with dark and light themes",
+    title: "Smart Organization",
+    description: "Powerful labels and views to organize your way",
   },
   {
     icon: Zap,
-    title: "Fast & Responsive",
-    description: "Built with Next.js for blazing-fast performance",
+    title: "Built for Speed",
+    description: "Blazing-fast performance that keeps up with you",
   },
   {
     icon: Shield,
-    title: "Secure",
-    description: "Your data is protected with industry-standard security",
+    title: "Always Secure",
+    description: "Enterprise-grade security for your peace of mind",
   },
 ];
 
@@ -34,25 +34,25 @@ export function LandingPage() {
       {/* Header */}
       <header className="flex items-center justify-between p-4 lg:px-8">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-amber-500 flex items-center justify-center shadow-sm">
-            <svg className="w-6 h-6 text-primary-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 11l3 3L22 4" />
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/30 ring-2 ring-indigo-500/20">
+            <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 11 12 14 22 4" />
               <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
             </svg>
           </div>
-          <span className="text-xl font-semibold text-foreground">Notely</span>
+          <span className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">Velocity</span>
         </div>
         <div className="flex items-center gap-4">
           <ThemeToggle />
           <Link
             href="/login"
-            className="text-muted-foreground hover:text-foreground transition-colors"
+            className="text-muted-foreground hover:text-foreground font-medium transition-colors"
           >
             Sign In
           </Link>
           <Link
             href="/register"
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium"
+            className="px-5 py-2.5 bg-gradient-to-r from-indigo-500 to-violet-600 text-white rounded-lg hover:shadow-lg hover:shadow-indigo-500/40 transition-all font-semibold"
           >
             Get Started
           </Link>
@@ -72,24 +72,26 @@ export function LandingPage() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-8"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-indigo-500/10 to-violet-500/10 border border-indigo-500/30 rounded-full mb-8 backdrop-blur-sm"
           >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-foreground">
-              Your personal task manager
+            <Sparkles className="w-4 h-4 text-indigo-600" />
+            <span className="text-sm font-semibold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
+              Move with purpose and velocity
             </span>
           </motion.div>
 
           {/* Title */}
-          <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-            Capture ideas,{" "}
-            <span className="text-primary">organize tasks</span>
+          <h1 className="text-5xl md:text-7xl font-extrabold text-foreground mb-6 leading-tight tracking-tight">
+            Stay focused.{" "}
+            <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-indigo-600 bg-clip-text text-transparent">
+              Get things done.
+            </span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-            A beautiful, simple task management app.
-            Create notes, organize your thoughts, and get things done.
+          <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
+            Transform your to-do list into forward momentum. Simple, powerful task management
+            that helps you achieve more every day.
           </p>
 
           {/* CTA Buttons */}
@@ -97,15 +99,15 @@ export function LandingPage() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/register"
-                className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground rounded-xl text-lg font-semibold shadow-lg shadow-primary/25 hover:bg-primary/90 transition-colors"
+                className="inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-indigo-500 to-violet-600 text-white rounded-xl text-lg font-bold shadow-xl shadow-indigo-500/30 hover:shadow-2xl hover:shadow-indigo-500/50 transition-all ring-2 ring-indigo-500/20"
               >
-                Start for free
+                Start building momentum
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/login"
-                className="inline-flex items-center justify-center px-8 py-4 bg-card border border-card-border text-foreground rounded-xl text-lg font-semibold hover:bg-card-hover transition-colors"
+                className="inline-flex items-center justify-center px-10 py-4 bg-card border-2 border-indigo-500/30 text-foreground rounded-xl text-lg font-bold hover:bg-indigo-500/5 hover:border-indigo-500/50 transition-all"
               >
                 Sign in
               </Link>
@@ -126,15 +128,15 @@ export function LandingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 + index * 0.1 }}
-              className="p-6 bg-card rounded-xl border border-card-border hover:shadow-lg transition-shadow"
+              className="p-7 bg-card rounded-2xl border-2 border-card-border hover:shadow-xl hover:shadow-indigo-500/10 hover:border-indigo-500/40 hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <feature.icon className="w-6 h-6 text-primary" />
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 flex items-center justify-center mb-5 ring-2 ring-indigo-500/20">
+                <feature.icon className="w-7 h-7 text-indigo-600" />
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
+              <h3 className="text-xl font-bold text-foreground mb-2">
                 {feature.title}
               </h3>
-              <p className="text-muted-foreground">{feature.description}</p>
+              <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -185,15 +187,18 @@ export function LandingPage() {
               </div>
             </div>
             {/* Glow effect */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-amber-500/20 to-primary/20 rounded-2xl blur-3xl -z-10" />
+            <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 via-violet-500/20 to-indigo-500/20 rounded-2xl blur-3xl -z-10" />
           </div>
         </motion.div>
       </main>
 
       {/* Footer */}
-      <footer className="py-8 text-center border-t border-card-border">
-        <p className="text-muted-foreground">
+      <footer className="py-8 text-center border-t border-card-border bg-sidebar-bg/30">
+        <p className="text-muted-foreground font-medium">
           Built with Next.js, FastAPI & PostgreSQL
+        </p>
+        <p className="text-xs text-muted-foreground/60 mt-2">
+          &copy; 2026 Velocity. Move with purpose.
         </p>
       </footer>
     </div>

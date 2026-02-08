@@ -2,14 +2,14 @@
 id: "0001"
 title: "AI Chatbot Specification"
 stage: spec
-date: 2025-12-03
+date: 2026-01-29
 surface: agent
-model: claude-opus-4-5-20251101
+model: claude-sonnet-4-5-20250929
 feature: 003-ai-chatbot
 branch: 003-ai-chatbot
-user: dell
+user: venisa-sara
 command: /sp.specify
-labels: ["specification", "chatbot", "mcp", "agents-sdk"]
+labels: ["specification", "chatbot", "mcp", "agents-sdk", "hackathon"]
 links:
   spec: specs/003-ai-chatbot/spec.md
   ticket: null

@@ -1,8 +1,8 @@
 # Feature Specification: Console Todo App
 
 **Feature Branch**: `001-console-todo-app`
-**Created**: 2025-12-01
-**Status**: Draft
+**Created**: 2026-01-15
+**Status**: Implemented
 **Input**: Phase 1: In-Memory Python Console Todo App with interactive menu interface
 
 ## User Scenarios & Testing *(mandatory)*

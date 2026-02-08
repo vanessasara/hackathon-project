@@ -1,7 +1,7 @@
 # Feature Specification: AI-Powered Todo Chatbot
 
 **Feature Branch**: `003-ai-chatbot`
-**Created**: 2025-12-03
+**Created**: 2026-01-29
 **Status**: Draft
 **Input**: User description: "AI-powered Todo Chatbot with natural language task management using ChatKit, Agents SDK, and MCP tools"
 

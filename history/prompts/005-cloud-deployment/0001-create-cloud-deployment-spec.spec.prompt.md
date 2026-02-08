@@ -2,14 +2,14 @@
 id: "0001"
 title: "Create Cloud Deployment Spec"
 stage: spec
-date: 2025-12-04
+date: 2026-02-08
 surface: agent
-model: claude-opus-4-5-20251101
+model: claude-sonnet-4-5-20250929
 feature: 005-cloud-deployment
 branch: 005-cloud-deployment
-user: zeeshan
+user: venisa-sara
 command: /sp.specify
-labels: ["cloud", "deployment", "kubernetes", "digitalocean", "cicd"]
+labels: ["cloud", "deployment", "kubernetes", "digitalocean", "cicd", "hackathon"]
 links:
   spec: specs/005-cloud-deployment/spec.md
   ticket: null

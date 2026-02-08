@@ -1,23 +1,29 @@
-# Environment files with secrets
-.env
-.env.local
-.env.*.local
-
-# Dependencies
-node_modules/
-.venv/
+# Python
 __pycache__/
-*.pyc
-
-# Build outputs
-.next/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
 dist/
 build/
-*.egg-info/
+.venv/
+venv/
+*.db
+*.sqlite
 
-# IDE
-.idea/
+# Node
+node_modules/
+.next/
+out/
+*.log
+.env.local
+.env*.local
+.turbo/
+
+# IDEs
 .vscode/
+.idea/
 *.swp
 *.swo
 
@@ -25,15 +31,6 @@ build/
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
-npm-debug.log*
-pnpm-debug.log*
-
-# Testing
-.coverage
-htmlcov/
-.pytest_cache/
-
-# MCP config (may contain local paths)
-.mcp.json
+# Temp
+auth-old/
+todo.db
